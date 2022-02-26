@@ -1,0 +1,22 @@
+        .welcome {
+            border: 1px solid black;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            text-align: center;
+            box-sizing: content-box;
+        }
+
+        .center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        p {
+            padding: 20px;
+        }
+
+        #btnBegin {
+            padding: 20px 30px;
+        }
+   
