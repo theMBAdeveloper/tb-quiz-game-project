@@ -1,30 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Question Page</title>
-    <link rel="stylesheets" href="/styles.css">
-    <script>
         var countDownTimer;
         var timerInterval;
         var arrayOfQuestions = [];
+        var gameScore = 0
+        const timePenalty = 30; //time is in seconds
         const maxTime = 5 * 60; //time is in seconds
         function setCountDownTimer() {
             countDownTimer = maxTime;
+            console.log("countDownTimer: ", CountDownTimer);
         }
         
         //When the person clicks the begin button the timer starts
         //start time
-        timerInterval = setInterval(updateTimer, 1000);
+        function startTimer() {
+            timerInterval = setInterval(updateTimer, 1000);
+            console.log("startTimer:", timerInterval);
+        }
 
         function updateTimer() {  
-            countDownTimer = countDownTimer - 1;
+            console.log("updateTimer: begun");
+            countDownTimer--;
+            console.log("updateTimer: countDownTimer", countDownTimer);
+            presentTimer();
         }
+
+        function presentTimer() {
+            let currentTime = document.getElementById('timer');
+            currentTime.innerText = countDownTimer;
+            console.log("presentTimer: currentTime", currentTime);
+        }
+
+       function showScoreBoard() {
+           let scoreBoard = document.getElementById('score-board');
+           console.log("showScoreBoard: scoreBoard", scoreBoard);
+           //scoreBoard.classList.toggle('hide', false);
+           scoreBoard.classList.remove('hide');
+       }
+
+       function presentScore() {
+           let currentScore = document.getElementById('score');
+           currentScore.innerText = gameScore;
+           console.log("presentScore: currentScore", currentScore);
+       }
+
+       function hideGreeting() {
+        let greeting = document.getElementById('greeting');
+        console.log("hideGreeting: greeting", greeting);
+        //scoreBoard.classList.toggle('hide', false);
+        scoreBoard.classList.add('hide');
+       }
+
+
+
         //question is asked
-        function SetupQuestions() {
+        function SetupQuestionsAndAnswers() {
             console.log("SetupQuestions started");
             let question1 = {
                 id: "quest0",
@@ -53,19 +81,69 @@
 
         }
 
-        function nextQuestion() {
+        function getQuestion(questionId) {
+            console.log('getQuestion questionId', questionId);
+
+            let found = false
+
             for(let i = 0; i<arrayOfQuestions.length; i++) {
-                
+                if(questionId == arrayOfQuestions[i].id) {
+                    prepareQuestionAndAnswers(i);
+                }
             }
         }
 
-        function showQuestion(questionindex) {
-            let questionSection = document.getElementById('question');
+        function prepareQuestionAndAnswers(questionIndex) {
+            console.log('prepareQuestionAndAnswers questionIndex', questionIndex);
+            let questionSection = document.getElementById('questions');
             let newQuestion = document.createElement('div');
-            newQuestion.id = arrayOfQuestions[questionindex].id;
-            newQuestion.innerText = arrayOfQuestions[questionindex].question;
-            questionSection.appendChild()
+            newQuestion.id = arrayOfQuestions[questionIndex].id;
+            newQuestion.classList.add('question');
+
+            let qSpan = document.createElement('span');
+            qSpan.innerText = arrayOfQuestions[questionIndex].question;
+            newQuestion.appendChild(qSpan);
+
+
+            if(arrayOfQuestions[questionIndex].answer1) {
+                let answer = document.createElement('div');
+                let rdoBtn = document.createElement('input');
+                let label = document.createElement('label');
+
+                rdoBtn.id = `${arrayOfQuestions[questionIndex].id}_answer1`;
+                rdoBtn.setAttribute('type', 'radio');
+                rdoBtn.value = 1
+                rdoBtn.classList.add('answer');
+                rdoBtn.classList.add (`${arrayOfQuestions[questionIndex].id}`);
+                rdoBtn.name = arrayOfQuestions[questionIndex].id;
+
+                label.innerText = arrayOfQuestions[questionIndex].answer1;
+                label.setAttribute('for', `${rdoBtn.id}`);
+
+                answer.classList.add('answer');
+                answer.appendChild(rdoBtn);
+                answer.appendChild(label);
+                newQuestion.appendChild(answer);
+
+                console.log('prepareQuestionAndAnswers answer', answer);
+            }
+
+            if(arrayOfQuestions[questionIndex].answer2) {
+                let answer = document.createElement('div');
+                answer.innerText = arrayOfQuestions[questionIndex].answer2;
+                answer.classList.add('answer');
+                answer.id = `${arrayOfQuestions[questionIndex].id}_answer2`;
+                questionSection.appendChild(answer);
+
+                console.log('prepareQuestionAndAnswer answer', answer);
+            }
+
+
+            questionSection.appendChild(newQuestion);
+
+            console.log('prepareQuestionAndAnswers newQuestion', newQuestion);
         }
+
 
 
 
@@ -78,12 +156,11 @@
         //Once all questions have been answered give options
         //Once all questions have been answered give options to save score
         //If user chooses to save score show the scoreboard
-    </script>
-</head>
+
 
 <body>
     <div class="welcome">
-        <span style="text-align:left">Time Remaining:</span>
+        <div id="timer>"></div><span style="text-align:left">Time Remaining:</span>
         <span style="text-align:right">Score:</span>
     </div>
 
@@ -103,4 +180,12 @@
     </div>
 </body>
 
-</html>
+function doGame() {
+    setCountDownTimer();
+    startTimer();
+    hideGreeting();
+    SetupQuestionsAndAnswers();
+    showScoreBoard();
+    presentScore();
+    getQuestion('quest0');
+}

@@ -7,17 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Game</title>  
     <link rel="stylesheet" href="styles.css">
+    <script src=""index.js defer></script>
 </head>
 
 <body>
     <div id="main center">
-        <div class="welcome">
+        <div id="greeting" class="welcome">
             <p>Test your front end developer skills by answering the following questions.</p>
-        <a href="question.html">
-            <button id ="btnBegin" onclick="doSomething();">Begin</button> 
-        </a>
+            <!--<form> <button type="submit" formaction="/question.html"> Begin </button></form>-->
+            <button id ="btnBegin" onclick="doGame();">Begin</button> 
         </div>
+        <div class="score-board" class="hide">
+            <div id="timerContainer">Time Remaining: <span id="timer" style="text-align:left"></span></div>
+            <div id="scoreContainer">Score:  <span id="score" style="text-align:right"></span></div>
+        </div>
+        <div id="answer">
+            <input id="quest0_answer5" type="radio" name="quest0" class="answer quest5"></input>    
+            <label for="quest0_answer5">A possible answer</label>
     </div>
+
 </body>
 
 </html>

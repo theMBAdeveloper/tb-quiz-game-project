@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Question Page</title>
     <link rel="stylesheets" href="/styles.css">
-    <script>
+    <script src=""index.js defer></script>
+   <!-- <script>
         var countDownTimer;
         var timerInterval;
         var arrayOfQuestions = [];
@@ -60,13 +61,12 @@
         }
 
         function showQuestion(questionindex) {
-            let questionSection = document.getElementId('question');
+            let questionSection = document.getElementById('question');
             let newQuestion = document.createElement('div');
             newQuestion.id = arrayOfQuestions[questionindex].id;
             newQuestion.innerText = arrayOfQuestions[questionindex].question;
-            
+            questionSection.appendChild(newQuestion);
         }
-
 
 
 
@@ -78,7 +78,7 @@
         //Once all questions have been answered give options
         //Once all questions have been answered give options to save score
         //If user chooses to save score show the scoreboard
-    </script>
+    </script> -->
 </head>
 
 <body>
@@ -90,7 +90,7 @@
 
     <div>
         <div id="question">
-            <div>Question: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+            <!-- <div>Question: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
             
             <div id="a">A1: Ut enim ad minim veniam, quis nostrud exercitation ullamco</div>
             
@@ -98,7 +98,7 @@
             
             <div id="c">A3: Excepteur sint occaecat</div>
             
-            <div id="d">A4: deserunt mollit anim id</div>
+            <div id="d">A4: deserunt mollit anim id</div> --> 
         </div>
     </div>
 </body>
